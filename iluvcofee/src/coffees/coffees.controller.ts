@@ -3,8 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
-  HttpStatus,
   Param,
   Patch,
   Post,
@@ -18,28 +16,27 @@ export class CoffeesController {
 
   @Get()
   findAll(@Query() paginationQuery) {
-    const { limit, offset } = paginationQuery;
-    return `This action return all coffees. Limit: ${limit}, offset: ${offset}`;
+    // const { limit, offset } = paginationQuery;
+    return this.coffeesService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return `This action return #${id} coffee`;
+    return this.coffeesService.findOne(id);
   }
 
   @Post()
-  @HttpCode(HttpStatus.GONE)
   create(@Body() body) {
-    return body;
+    return this.coffeesService.create(body);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() body) {
-    return `This action updates #${id} coffee`;
+    return this.coffeesService.update(id, body);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return `This action removes #${id} coffee`;
+    return this.coffeesService.remove(id);
   }
 }
