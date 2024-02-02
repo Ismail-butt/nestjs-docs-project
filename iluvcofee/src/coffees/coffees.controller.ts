@@ -13,6 +13,7 @@ import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
+import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 
 @Controller('coffees')
 export class CoffeesController {
@@ -21,13 +22,11 @@ export class CoffeesController {
   @Public()
   @Get()
   async findAll(@Query() paginationQuery: PaginationQueryDto) {
-    await new Promise((resolve) => setTimeout(() => resolve, 5000));
     return this.coffeesService.findAll(paginationQuery);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
-    console.log(typeof id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.coffeesService.findOne('' + id);
   }
 
