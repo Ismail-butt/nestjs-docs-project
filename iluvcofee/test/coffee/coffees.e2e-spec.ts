@@ -60,7 +60,10 @@ describe('[Feature] Coffees - /coffees', () => {
       });
   });
 
-  it.todo('Get all [GET /]');
+  it('Get all [GET /]', () => {
+    return request(app.getHttpServer()).get('/coffees').expect(HttpStatus.OK);
+  });
+
   it.todo('Get one [GET /:id]');
   it.todo('Update one [PATCH /:id]');
   it.todo('Delete one [DELETE /:id]');
